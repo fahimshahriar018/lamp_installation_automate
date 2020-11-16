@@ -35,9 +35,9 @@ function is_service_active(){
 	service_active=$(systemctl is-active $1)
 	if [[ $service_active = "active" ]]
 	then
-		echo "$1 is active and running"
+		print_color "green" "$1 is active and running"
 	else
-		echo "$1 is not active/running"
+		print_color "red" "$1 is not active/running"
 		exit 1
 	fi
 }
@@ -51,9 +51,9 @@ function is_service_enabled(){
 	service_enable=$(systemctl is-enabled $1)
 	if [[ $service_enable = "enabled" ]]
 	then
-		echo "$1 is Enabled"
+		print_color "green" "$1 is Enabled"
 	else
-		echo "$1 is not Enabled"
+		print_color "red" "$1 is not Enabled"
 		exit 1
 	fi
 }
@@ -66,9 +66,9 @@ function is_firewall_port_open(){
 	firewalld_ports=$(firewall-cmd --list-ports)
 	if [[ $firewalld_ports == *$1*  ]]
 	then	
-		echo "$1 port is open in firewall"
+		print_color "green" "$1 port is open in firewall"
 	else
-		echo "$1 port is not open in firewall"
+		print_color "red" "$1 port is not open in firewall"
 		exit 1
 	fi
 }
@@ -81,9 +81,9 @@ function is_firewall_service_open(){
 	firewalld_service=$(firewall-cmd --list-service)
 	if [[ $firewalld_service == *$1*  ]]
 	then	
-		echo "$1 service is open in firewall"
+		print_color "green" "$1 service is open in firewall"
 	else
-		echo "$1 service is not open in firewall"
+		print_color "red" "$1 service is not open in firewall"
 		exit 1
 	fi
 }
@@ -123,7 +123,7 @@ mysql < setup-db.sql
 
 
 ############### Install php 7.3  ##################
-print_color "green" "Start Installing php"
+print_color "green" "Start Installing php........"
 yum install yum-utils -y
 yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm -y
 yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm -y
@@ -134,7 +134,7 @@ yum install php php-mcrypt php-cli php-gd php-curl php-mysql php-ldap php-zip ph
  print_color "green" "$(php -v)" 
 
 ########### Install Global Composer ######
-print_color "green" "Start Installing global composer"
+print_color "green" "Start Installing global composer.........."
 # Download Composer 
 
 php -r "readfile('https://getcomposer.org/installer');" | php
@@ -145,7 +145,7 @@ php -r "readfile('https://getcomposer.org/installer');" | php
 
 
 ############ Install, config httpd ##########
-print_color "green" "Start Installing Apache"
+print_color "green" "Start Installing Apache......."
 yum install httpd -y
 
 # Config virtual host for website
