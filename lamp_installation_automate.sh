@@ -182,7 +182,7 @@ is_firewall_service_open "https"
 
 #install epel-release Repo to install additional packages like phpmyadmin
 
-print_color "green" "Start Installing phpmyadmin"
+print_color "green" "Start Installing phpmyadmin....."
 yum install epel-release -y
 yum install phpmyadmin -y
 
